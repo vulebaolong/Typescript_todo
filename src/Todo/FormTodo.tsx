@@ -1,24 +1,28 @@
 import { useState } from "react";
 import { I_FormProps } from "./interface";
+import { customAlphabet } from "nanoid";
 
 export default function FormTodo({ addTodo }: I_FormProps) {
-    const [title, setTitle] = useState("Làm dự án cuối khóa");
+    const [title, setTitle] = useState("");
 
     const handleOnchange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(e.target.value);
-        setTitle(e.target.value);
+        const value = e.target.value;
+        setTitle(value);
     };
-    const handleClick = () => {
+    const handleSubmit = () => {
+        const value = title.trim();
+        if (value === "") return;
         addTodo({
-            id: 1,
+            id: +customAlphabet("1234567890", 10)(),
             title: title,
             isCompleted: false,
         });
+        setTitle("")
     };
     return (
         <div className="flex gap-3">
             <input onChange={handleOnchange} value={title} type="text" className="flex-1 text-sm px-4 border border-gray-300 rounded-lg bg-gray-700 dark:text-white" />
-            <button onClick={handleClick} className="px-5 py-2 bg-slate-500 hover:bg-slate-600 active:hover:bg-slate-700 rounded-lg transition">
+            <button onClick={handleSubmit} className="px-5 py-2 bg-slate-500 hover:bg-slate-600 active:hover:bg-slate-700 rounded-lg transition">
                 Add
             </button>
         </div>

@@ -6,14 +6,15 @@ export interface I_Todo {
 
 export interface I_ListTodoProps {
     todos: I_Todo[]
+    deleteTodo: (todo:I_Todo) => void;
 }
 
 export interface I_ItemTodoProps {
     todo: I_Todo
+    deleteTodo: (todo:I_Todo) => void;
 }
 
 export interface I_FormProps {
     addTodo: (todo:I_Todo) => void;
-    deleteTodo: (todo:I_Todo) => void;
 }
 
